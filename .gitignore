@@ -1,0 +1,9 @@
+venv
+.env
+common/__pycache__
+config_data/__pycache__
+database/__pycache__
+filters/__pycache__
+handlers/__pycache__
+kbds/__pycache__
+middleware/__pycache__

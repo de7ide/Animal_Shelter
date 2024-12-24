@@ -3,8 +3,6 @@ import os
 from aiogram import Bot, types
 from config_data.config import Config, load_config
 
-admins = os.getenv('ADMINS_IDS')
-
 
 class ChatTypeFilter(Filter):
     def __init__(self, chat_types: list[str]) -> None:
