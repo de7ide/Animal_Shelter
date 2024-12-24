@@ -1,8 +1,10 @@
 import asyncio
+from redis.asyncio import Redis
 
 from aiogram import Bot, Dispatcher
 from aiogram.enums import ParseMode
 from aiogram.client.default import DefaultBotProperties
+from aiogram.fsm.storage.redis import RedisStorage
 
 from config_data.config import Config, load_config
 from middlewares.db import DataBaseSession
@@ -14,13 +16,15 @@ from common.bot_cmds_list import private
 
 config: Config = load_config()
 
+redis = Redis(host='localhost')
+storage = RedisStorage(redis=redis)
 
 bot = Bot(
     token=config.token,
     default=DefaultBotProperties(parse_mode=ParseMode.HTML)
 )
 
-dp = Dispatcher()
+dp = Dispatcher(storage=storage)
 
 dp.include_router(user_private_router)
 dp.include_router(admin_router)
